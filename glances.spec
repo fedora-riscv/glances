@@ -1,5 +1,5 @@
 Name:		glances		
-Version:	1.2
+Version:	1.3
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -46,8 +46,12 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING README ChangeLog
 %{_bindir}/glances
 %{python_sitelib}/glances
+%{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Wed Dec 14 2011 Edouard Bourguignon <madko@linuxed.net> - 1.3-1
+- Upgrade to version 1.3
+
 * Tue Dec 13 2011 Edouard Bourguignon <madko@linuxed.net> - 1.2-1
 - Upgrade to version 1.2
 
