@@ -1,5 +1,5 @@
 Name:		glances		
-Version:	1.3.1
+Version:	1.3.2
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Wed Dec 21 2011 Edouard Bourguignon <madko@linuxed.net> - 1.3.2-1
+- Upgrade to version 1.3.2
+
 * Sat Dec 17 2011 Edouard Bourguignon <madko@linuxed.net> - 1.3.1-1
 - Upgrade to version 1.3.1 (fix fs display)
 
