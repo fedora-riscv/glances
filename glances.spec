@@ -1,6 +1,6 @@
 Name:		glances		
-Version:	1.3.4
-Release:	2%{?dist}
+Version:	1.3.5
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -49,8 +49,8 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
-* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3.4-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+* Tue Jan 17 2012 Edouard Bourguignon <madko@linuxed.net> - 1.3.5-1
+- Upgrade to version 1.3.5
 
 * Fri Dec 30 2011 Edouard Bourguignon <madko@linuxed.net> - 1.3.4-1
 - Upgrade to version 1.3.4
