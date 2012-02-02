@@ -1,5 +1,5 @@
 Name:		glances		
-Version:	1.3.6
+Version:	1.3.7
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Thu Feb  2 2012 Edouard Bourguignon <madko@linuxed.net> - 1.3.7-1
+- Upgrade to version 1.3.7
+
 * Fri Jan 20 2012 Edouard Bourguignon <madko@linuxed.net> - 1.3.6-1
 - Upgrade to version 1.3.6 (fix crash when a network intf is removed)
 
