@@ -1,6 +1,6 @@
 Name:		glances		
 Version:	1.3.7
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -11,7 +11,11 @@ BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:	automake	
+%if 0%{?el5}
+BuildRequires:	python26-devel
+%else
 BuildRequires:	python-devel
+%endif
 Requires:	pystatgrab >= 0.5
 
 %description
@@ -49,6 +53,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Mon Feb 13 2012 Edouard Bourguignon <madko@linuxed.net> - 1.3.7-2
+- Add version for python
+
 * Thu Feb  2 2012 Edouard Bourguignon <madko@linuxed.net> - 1.3.7-1
 - Upgrade to version 1.3.7
 
