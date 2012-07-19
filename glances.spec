@@ -1,6 +1,6 @@
 Name:		glances		
 Version:	1.3.7
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -53,6 +53,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3.7-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Mon Feb 13 2012 Edouard Bourguignon <madko@linuxed.net> - 1.3.7-2
 - Add version for python
 
