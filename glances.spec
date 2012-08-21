@@ -1,15 +1,18 @@
 Name:		glances		
 Version:	1.4
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
+Patch0:		glances_remove_shebang.patch
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildRequires:	python-setuptools-devel
+Requires:	python-setuptools
+Requires:	python-psutil
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -20,13 +23,14 @@ It is developed in Python.
 
 %prep
 %setup -q
+%patch0 -p1
 
 
 %build
 
 
 %install
-%{__python} setup.py install --skip-build --root %{buildroot}
+%{__python} setup.py install --root %{buildroot}
 %find_lang %{name}
 
 
@@ -44,6 +48,10 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Tue Aug 21 2012 Edouard Bourguignon <madko@linuxed.net> - 1.4-2
+- Adding missing dependencies
+- Removing shebang in non-executable files
+
 * Tue Aug 21 2012 Edouard Bourguignon <madko@linuxed.net> - 1.4-1
 - Upgrade to version 1.4
 
