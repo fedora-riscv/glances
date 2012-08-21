@@ -1,6 +1,6 @@
 Name:		glances		
-Version:	1.3.7
-Release:	3%{?dist}
+Version:	1.4
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -9,50 +9,44 @@ URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-
-BuildRequires:	automake	
-%if 0%{?el5}
-BuildRequires:	python26-devel
-%else
-BuildRequires:	python-devel
-%endif
-Requires:	pystatgrab >= 0.5
+BuildRequires:	python-setuptools-devel
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
-Glances uses the libstatgrab library to get information from your system.
-Glances is developed in Python and uses the python-statgrab lib.
+Glances uses the PsUtil library to get information from your system.
 
+It is developed in Python.
 
 %prep
 %setup -q
 
 
 %build
-%configure
-make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot} 
-make install DESTDIR=%{buildroot}
-rm -rf %{buildroot}/usr/doc/glances
-sed -i '1d' %{buildroot}/%{python_sitelib}/%{name}/%{name}.py
-mv %{buildroot}/%{_bindir}/glances.py %{buildroot}/%{_bindir}/glances
+%{__python} setup.py install --skip-build --root %{buildroot}
+%find_lang %{name}
+
 
 %clean
 rm -rf %{buildroot} 
 
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README ChangeLog
+%doc AUTHORS COPYING README TODO 
 %{_bindir}/glances
-%{python_sitelib}/glances
+%{python_sitelib}/*
+%{_datadir}/doc/glances
+%{_datadir}/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Tue Aug 21 2012 Edouard Bourguignon <madko@linuxed.net> - 1.4-1
+- Upgrade to version 1.4
+
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3.7-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
