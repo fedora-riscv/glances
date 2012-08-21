@@ -1,0 +1,9 @@
+diff -Naur glances-1.4.ori/glances/glances.py glances-1.4/glances/glances.py
+--- glances-1.4.ori/glances/glances.py	2012-07-07 21:04:56.000000000 +0200
++++ glances-1.4/glances/glances.py	2012-08-21 19:53:14.900465984 +0200
+@@ -1,5 +1,3 @@
+-#!/usr/bin/env python
+-#
+ # Glances is a simple textual monitoring tool
+ #
+ # Pre-requisites: Python 2.6+ and PsUtil 0.4.0+ (for full functions)
