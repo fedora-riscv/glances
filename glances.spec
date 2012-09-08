@@ -1,6 +1,11 @@
+%if 0%{?rhel} && 0%{?rhel} <= 5
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
+%endif
+
 Name:		glances		
-Version:	1.4
-Release:	2%{?dist}
+Version:	1.4.1.1
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -10,9 +15,13 @@ Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.g
 Patch0:		glances_remove_shebang.patch
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+%if 0%{?rhel} && 0%{?rhel} <= 5
+BuildRequires:	python-setuptools
+%else
 BuildRequires:	python-setuptools-devel
+%endif
 Requires:	python-setuptools
-Requires:	python-psutil
+Requires:	python-psutil >= 0.4.1
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -48,6 +57,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sat Sep  1 2012 Edouard Bourguignon <madko@linuxed.net> - 1.4.1.1-1
+- Upgrade to 1.4.1.1
+
 * Tue Aug 21 2012 Edouard Bourguignon <madko@linuxed.net> - 1.4-2
 - Adding missing dependencies
 - Removing shebang in non-executable files
