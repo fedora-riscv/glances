@@ -4,7 +4,7 @@
 %endif
 
 Name:		glances		
-Version:	1.4.1.1
+Version:	1.5
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -12,7 +12,6 @@ Group:		Applications/System
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
-Patch0:		glances_remove_shebang.patch
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %if 0%{?rhel} && 0%{?rhel} <= 5
@@ -32,7 +31,6 @@ It is developed in Python.
 
 %prep
 %setup -q
-%patch0 -p1
 
 
 %build
@@ -51,12 +49,17 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README TODO 
 %{_bindir}/glances
+%attr(0655,-,-) %{python_sitelib}/glances/glances.py
+%attr(0655,-,-) %{python_sitelib}/glances/unitest.py
 %{python_sitelib}/*
 %{_datadir}/doc/glances
 %{_datadir}/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Thu Nov  8 2012 Edouard Bourguignon <madko@linuxed.net> - 1.5-1
+- Upgrade to 1.5
+
 * Sat Sep  1 2012 Edouard Bourguignon <madko@linuxed.net> - 1.4.1.1-1
 - Upgrade to 1.4.1.1
 
