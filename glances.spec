@@ -4,7 +4,7 @@
 %endif
 
 Name:		glances		
-Version:	1.5.1
+Version:	1.5.2
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -57,6 +57,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sun Dec 30 2012 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-1
+- Upgrade to 1.5.2
+
 * Tue Nov 13 2012 Edouard Bourguignon <madko@linuxed.net> - 1.5.1-1
 - Upgrade to 1.5.1 (fix compute data on el6)
 
