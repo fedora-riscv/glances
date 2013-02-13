@@ -5,7 +5,7 @@
 
 Name:		glances		
 Version:	1.5.2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -57,6 +57,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.5.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Sun Dec 30 2012 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-1
 - Upgrade to 1.5.2
 
