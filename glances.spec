@@ -5,7 +5,7 @@
 
 Name:		glances		
 Version:	1.5.2
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -60,6 +60,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sun Feb 24 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-4
+- Rebuild on F18
+
 * Sat Feb 23 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-3
 - Patch to fix bug #914837 (noSuchProcess)
 
