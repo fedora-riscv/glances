@@ -12,7 +12,8 @@ Group:		Applications/System
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
-Patch0:		glances-1.5.2-noSuchProcess.patch
+Patch0:		glances_uninitialised_y.patch
+Patch1:		glances-1.5.2-noSuchProcess.patch
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %if 0%{?rhel} && 0%{?rhel} <= 5
@@ -33,7 +34,7 @@ It is developed in Python.
 %prep
 %setup -q
 %patch0 -p1
-
+%patch1 -p1
 
 %build
 
@@ -62,8 +63,8 @@ rm -rf %{buildroot}
 * Sat Feb 23 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-3
 - Patch to fix bug #914837 (noSuchProcess)
 
-* Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.5.2-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+* Sat Jan 12 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-2
+- Patch to initialize y in displayMem (bug #894347)
 
 * Sun Dec 30 2012 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-1
 - Upgrade to 1.5.2
