@@ -5,13 +5,14 @@
 
 Name:		glances		
 Version:	1.5.2
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
+Patch0:		glances-1.5.2-noSuchProcess.patch
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %if 0%{?rhel} && 0%{?rhel} <= 5
@@ -31,6 +32,7 @@ It is developed in Python.
 
 %prep
 %setup -q
+%patch0 -p1
 
 
 %build
@@ -57,6 +59,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sat Feb 23 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-3
+- Patch to fix bug #914837 (noSuchProcess)
+
 * Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.5.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
