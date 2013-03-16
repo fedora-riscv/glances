@@ -4,20 +4,14 @@
 %endif
 
 Name:		glances		
-<<<<<<< HEAD
-Version:	1.5.2
-Release:	2%{?dist}
-=======
 Version:	1.6
 Release:	1%{?dist}
->>>>>>> master
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
-Patch0:		glances_uninitialised_y.patch
 BuildArch:	noarch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %if 0%{?rhel} && 0%{?rhel} <= 5
@@ -37,10 +31,6 @@ It is developed in Python.
 
 %prep
 %setup -q
-<<<<<<< HEAD
-%patch0 -p1
-=======
->>>>>>> master
 
 %build
 
@@ -68,15 +58,12 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
-<<<<<<< HEAD
-=======
 * Sat Mar 16 2013 Edouard Bourguignon <madko@linuxed.net> - 1.6-1
 - Upgrade to 1.6
 
 * Sat Feb 23 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-3
 - Patch to fix bug #914837 (noSuchProcess)
 
->>>>>>> master
 * Sat Jan 12 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-2
 - Patch to initialize y in displayMem (bug #894347)
 
