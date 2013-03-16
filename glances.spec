@@ -4,8 +4,13 @@
 %endif
 
 Name:		glances		
+<<<<<<< HEAD
 Version:	1.5.2
 Release:	2%{?dist}
+=======
+Version:	1.6
+Release:	1%{?dist}
+>>>>>>> master
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -32,7 +37,10 @@ It is developed in Python.
 
 %prep
 %setup -q
+<<<<<<< HEAD
 %patch0 -p1
+=======
+>>>>>>> master
 
 %build
 
@@ -40,6 +48,7 @@ It is developed in Python.
 %install
 %{__python} setup.py install --root %{buildroot}
 %find_lang %{name}
+mv %{buildroot}/usr/etc/ %{buildroot}
 
 
 %clean
@@ -50,6 +59,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README TODO 
 %{_bindir}/glances
+%config(noreplace) %{_sysconfdir}/glances
 %attr(0655,-,-) %{python_sitelib}/glances/glances.py
 %attr(0655,-,-) %{python_sitelib}/glances/unitest.py
 %{python_sitelib}/*
@@ -58,6 +68,15 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+<<<<<<< HEAD
+=======
+* Sat Mar 16 2013 Edouard Bourguignon <madko@linuxed.net> - 1.6-1
+- Upgrade to 1.6
+
+* Sat Feb 23 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-3
+- Patch to fix bug #914837 (noSuchProcess)
+
+>>>>>>> master
 * Sat Jan 12 2013 Edouard Bourguignon <madko@linuxed.net> - 1.5.2-2
 - Patch to initialize y in displayMem (bug #894347)
 
