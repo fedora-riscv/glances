@@ -3,14 +3,14 @@
 %endif
 
 Name:		glances		
-Version:	1.6
-Release:	2%{?dist}
+Version:	1.6.1
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
-Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
 %if 0%{?rhel} && 0%{?rhel} <= 5
 BuildRequires:	python26-distribute
@@ -43,7 +43,6 @@ It is developed in Python.
 %{__python} setup.py install --root %{buildroot}
 %endif
 %find_lang %{name}
-mv %{buildroot}/usr/etc/ %{buildroot}
 
 
 %clean
@@ -56,13 +55,15 @@ rm -rf %{buildroot}
 %{_bindir}/glances
 %config(noreplace) %{_sysconfdir}/glances
 %attr(0655,-,-) %{python_sitelib}/glances/glances.py
-%attr(0655,-,-) %{python_sitelib}/glances/unitest.py
 %{python_sitelib}/*
-%{_datadir}/doc/glances
+%exclude %{_datadir}/doc/glances
 %{_datadir}/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Thu Apr 18 2013 Michel Salim <salimma@fedoraproject.org> - 1.6.1-1
+- Update to 1.6.1
+
 * Tue Mar 19 2013 Michel Salim <salimma@fedoraproject.org> - 1.6-2
 - On el5, build against python26 stack
 
