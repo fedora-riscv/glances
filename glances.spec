@@ -3,8 +3,8 @@
 %endif
 
 Name:		glances		
-Version:	1.6.1
-Release:	2%{?dist}
+Version:	1.7
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sun Aug 11 2013 Edouard Bourguignon <madko@linuxed.net> - 1.7-1
+- Update to 1.7
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.6.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
