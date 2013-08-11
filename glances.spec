@@ -1,26 +1,27 @@
 %if 0%{?rhel} && 0%{?rhel} <= 5
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
+%{!?python_sitelib: %global python_sitelib %(%{__python}26 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 %endif
 
 Name:		glances		
-Version:	1.6
+Version:	1.7
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
-Source0:	https://github.com/downloads/nicolargo/%{name}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
-BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %if 0%{?rhel} && 0%{?rhel} <= 5
-BuildRequires:	python-setuptools
+BuildRequires:	python26-distribute
+Requires:	python26-distribute
+Requires:	python26-psutil >= 0.4.1
+BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %else
 BuildRequires:	python-setuptools-devel
-%endif
 Requires:	python-setuptools
 Requires:	python-psutil >= 0.4.1
+%endif
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -36,9 +37,12 @@ It is developed in Python.
 
 
 %install
+%if 0%{?rhel} && 0%{?rhel} <= 5
+%{__python}26 setup.py install --root %{buildroot}
+%else
 %{__python} setup.py install --root %{buildroot}
+%endif
 %find_lang %{name}
-mv %{buildroot}/usr/etc/ %{buildroot}
 
 
 %clean
@@ -47,17 +51,28 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README TODO 
+%doc AUTHORS COPYING README.rst TODO 
 %{_bindir}/glances
 %config(noreplace) %{_sysconfdir}/glances
 %attr(0655,-,-) %{python_sitelib}/glances/glances.py
-%attr(0655,-,-) %{python_sitelib}/glances/unitest.py
 %{python_sitelib}/*
-%{_datadir}/doc/glances
+%exclude %{_datadir}/doc/glances
 %{_datadir}/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sun Aug 11 2013 Edouard Bourguignon <madko@linuxed.net> - 1.7-1
+- Update to 1.7
+
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.6.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Thu Apr 18 2013 Michel Salim <salimma@fedoraproject.org> - 1.6.1-1
+- Update to 1.6.1
+
+* Tue Mar 19 2013 Michel Salim <salimma@fedoraproject.org> - 1.6-2
+- On el5, build against python26 stack
+
 * Sat Mar 16 2013 Edouard Bourguignon <madko@linuxed.net> - 1.6-1
 - Upgrade to 1.6
 
