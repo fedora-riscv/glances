@@ -51,7 +51,7 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README TODO 
+%doc AUTHORS COPYING README.rst TODO 
 %{_bindir}/glances
 %config(noreplace) %{_sysconfdir}/glances
 %attr(0655,-,-) %{python_sitelib}/glances/glances.py
