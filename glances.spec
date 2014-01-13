@@ -3,7 +3,7 @@
 %endif
 
 Name:		glances		
-Version:	1.7.1
+Version:	1.7.3
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -57,10 +57,15 @@ rm -rf %{buildroot}
 %attr(0655,-,-) %{python_sitelib}/glances/glances.py
 %{python_sitelib}/*
 %exclude %{_datadir}/doc/glances
-%{_datadir}/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Mon Jan 13 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.3-1
+- Update to 1.7.3
+
+* Tue Nov 12 2013 Edouard Bourguignon <madko@linuxed.net> - 1.7.2-1
+- Update to 1.7.2
+
 * Fri Aug 23 2013 Edouard Bourguignon <madko@linuxed.net> - 1.7.1-1
 - Update to 1.7.1
 
