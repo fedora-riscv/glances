@@ -3,7 +3,7 @@
 %endif
 
 Name:		glances		
-Version:	1.7.4
+Version:	1.7.5
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -60,6 +60,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sat Mar 15 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.5-1
+- Update to 1.7.5
+
 * Mon Jan 20 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.4-1
 - Update to 1.7.4
 
