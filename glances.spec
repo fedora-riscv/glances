@@ -4,7 +4,7 @@
 
 Name:		glances		
 Version:	1.7.7
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
