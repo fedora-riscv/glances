@@ -4,7 +4,7 @@
 
 Name:		glances		
 Version:	1.7.7
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -18,7 +18,7 @@ Requires:	python26-distribute
 Requires:	python26-psutil >= 0.4.1
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %else
-BuildRequires:	python-setuptools-devel
+BuildRequires:	python-setuptools
 Requires:	python-setuptools
 Requires:	python-psutil >= 0.4.1
 %endif
@@ -60,6 +60,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Mon Jun 30 2014 Toshio Kuratomi <toshio@fedoraproject.org> - 1.7.7-2
+- Replace BR python-setuptools-devel BR with python-setuptools
+
 * Thu Jun 12 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.7-1
 - Update to 1.7.7
 
