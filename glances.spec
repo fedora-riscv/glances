@@ -3,8 +3,8 @@
 %endif
 
 Name:		glances		
-Version:	1.7.7
-Release:	2%{?dist}
+Version:	2.1.2
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -18,9 +18,9 @@ Requires:	python26-distribute
 Requires:	python26-psutil >= 0.4.1
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %else
-BuildRequires:	python-setuptools
+BuildRequires:	python-setuptools-devel
 Requires:	python-setuptools
-Requires:	python-psutil >= 0.4.1
+Requires:	python-psutil >= 2.0.0
 %endif
 
 %description
@@ -51,23 +51,22 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README.rst TODO 
+%doc AUTHORS COPYING README.rst NEWS 
 %{_bindir}/glances
 %config(noreplace) %{_sysconfdir}/glances
-%attr(0655,-,-) %{python_sitelib}/glances/glances.py
 %{python_sitelib}/*
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
-* Mon Jun 30 2014 Toshio Kuratomi <toshio@fedoraproject.org> - 1.7.7-2
-- Replace BR python-setuptools-devel BR with python-setuptools
+* Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-1
+- Updat to 2.1.2
+
+* Thu Aug 07 2014 Edouard Bourguignon <madko@linuxed.net> - 2.0-1
+- Update to 2.0.0
 
 * Thu Jun 12 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.7-1
 - Update to 1.7.7
-
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.7.6-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
 * Wed Mar 26 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.6-1
 - Update to 1.7.6
