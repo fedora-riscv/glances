@@ -18,7 +18,7 @@ Requires:	python26-distribute
 Requires:	python26-psutil >= 0.4.1
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %else
-BuildRequires:	python-setuptools-devel
+BuildRequires:	python-setuptools
 Requires:	python-setuptools
 Requires:	python-psutil >= 2.0.0
 %endif
