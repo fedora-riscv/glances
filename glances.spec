@@ -3,8 +3,8 @@
 %endif
 
 Name:		glances		
-Version:	2.1.2
-Release:	2%{?dist}
+Version:	1.7.7
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -18,7 +18,7 @@ Requires:	python26-distribute
 Requires:	python26-psutil >= 0.4.1
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %else
-BuildRequires:	python-setuptools
+BuildRequires:	python-setuptools-devel
 Requires:	python-setuptools
 Requires:	python-psutil >= 2.0.0
 %endif
@@ -59,15 +59,6 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
-* Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-2
-- Remove old python-setuptools-devel, now using python-setuptools instead
-
-* Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-1
-- Updat to 2.1.2
-
-* Thu Aug 07 2014 Edouard Bourguignon <madko@linuxed.net> - 2.0-1
-- Update to 2.0.0
-
 * Thu Jun 12 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.7-1
 - Update to 1.7.7
 
