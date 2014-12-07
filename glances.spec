@@ -18,7 +18,7 @@ Requires:	python26-distribute
 Requires:	python26-psutil >= 0.4.1
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 %else
-BuildRequires:	python-setuptools-devel
+BuildRequires:  python-setuptools
 Requires:	python-setuptools
 Requires:	python-psutil >= 2.0.0
 %endif
@@ -61,6 +61,7 @@ rm -rf %{buildroot}
 %changelog
 * Thu Jun 12 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.7-1
 - Update to 1.7.7
+- Change BuildRequires for python-setuptools
 
 * Wed Mar 26 2014 Edouard Bourguignon <madko@linuxed.net> - 1.7.6-1
 - Update to 1.7.6
