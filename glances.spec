@@ -42,6 +42,8 @@ It is developed in Python.
 %else
 %{__python} setup.py install --root %{buildroot}
 %endif
+install -D conf/glances.conf %{buildroot}%{_sysconfdir}/glances/glances.conf
+install -D conf/glances-test.conf %{buildroot}%{_sysconfdir}/glances/glances-test.conf
 %find_lang %{name}
 
 
@@ -61,6 +63,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Jan 02 2015 Edouard Bourguignon <madko@linuxed.net> - 2.2.1-1
 - Update to 2.2.1
+- Add glances.conf and glances-test.conf
 
 * Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-2
 - Remove old python-setuptools-devel, now using python-setuptools instead
