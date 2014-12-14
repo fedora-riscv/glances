@@ -4,7 +4,7 @@
 
 Name:		glances		
 Version:	2.2.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -33,7 +33,7 @@ It is developed in Python.
 
 %prep
 %setup -q
-%patch0
+%patch0 -p1
 
 %build
 
@@ -61,9 +61,12 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sat Jan 03 2015 Edouard Bourguignon <madko@linuxed.net> - 2.2.1-2
+- Upstream patch for non root build
+
 * Fri Jan 02 2015 Edouard Bourguignon <madko@linuxed.net> - 2.2.1-1
 - Update to 2.2.1
-- Add patch to enable mock build (no need to be root)
+- Add glances.conf and glances-test.conf
 
 * Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-2
 - Remove old python-setuptools-devel, now using python-setuptools instead
