@@ -3,8 +3,8 @@
 %endif
 
 Name:		glances		
-Version:	2.1.2
-Release:	2%{?dist}
+Version:	2.2.1
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -59,11 +59,14 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Fri Jan 02 2015 Edouard Bourguignon <madko@linuxed.net> - 2.2.1-1
+- Update to 2.2.1
+
 * Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-2
 - Remove old python-setuptools-devel, now using python-setuptools instead
 
 * Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-1
-- Updat to 2.1.2
+- Update to 2.1.2
 
 * Thu Aug 07 2014 Edouard Bourguignon <madko@linuxed.net> - 2.0-1
 - Update to 2.0.0
