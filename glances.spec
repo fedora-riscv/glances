@@ -11,6 +11,7 @@ Group:		Applications/System
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
+Patch0:		glances_no_root_needed.patch
 BuildArch:	noarch
 %if 0%{?rhel} && 0%{?rhel} <= 5
 BuildRequires:	python26-distribute
@@ -32,6 +33,7 @@ It is developed in Python.
 
 %prep
 %setup -q
+%patch0
 
 %build
 
@@ -42,8 +44,6 @@ It is developed in Python.
 %else
 %{__python} setup.py install --root %{buildroot}
 %endif
-install -D conf/glances.conf %{buildroot}%{_sysconfdir}/glances/glances.conf
-install -D conf/glances-test.conf %{buildroot}%{_sysconfdir}/glances/glances-test.conf
 %find_lang %{name}
 
 
@@ -63,7 +63,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Jan 02 2015 Edouard Bourguignon <madko@linuxed.net> - 2.2.1-1
 - Update to 2.2.1
-- Add glances.conf and glances-test.conf
+- Add patch to enable mock build (no need to be root)
 
 * Mon Oct 20 2014 Edouard Bourguignon <madko@linuxed.net> - 2.1.2-2
 - Remove old python-setuptools-devel, now using python-setuptools instead
