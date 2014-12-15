@@ -3,15 +3,14 @@
 %endif
 
 Name:		glances		
-Version:	2.2.1
-Release:	2%{?dist}
+Version:	2.3
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
-Patch0:		glances_no_root_needed.patch
 BuildArch:	noarch
 %if 0%{?rhel} && 0%{?rhel} <= 5
 BuildRequires:	python26-distribute
@@ -33,7 +32,6 @@ It is developed in Python.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 
@@ -61,6 +59,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sun Feb 01 2015 Edouard Bourguignon <madko@linuxed.net> - 2.3-1
+- Update to 2.3
+
 * Sat Jan 03 2015 Edouard Bourguignon <madko@linuxed.net> - 2.2.1-2
 - Upstream patch for non root build
 
