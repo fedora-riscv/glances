@@ -3,8 +3,8 @@
 %endif
 
 Name:		glances		
-Version:	2.3
-Release:	2%{?dist}
+Version:	2.5.1
+Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -42,14 +42,13 @@ It is developed in Python.
 %else
 %{__python} setup.py install --root %{buildroot}
 %endif
-%find_lang %{name}
 
 
 %clean
 rm -rf %{buildroot} 
 
 
-%files -f %{name}.lang
+%files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %{_bindir}/glances
@@ -59,6 +58,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Sat Nov  7 2015 Edouard Bourguignon <madko@linuxed.net> - 2.5.1
+- Update to 2.5.1
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
