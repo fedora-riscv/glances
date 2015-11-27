@@ -52,7 +52,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %{_bindir}/glances
-%config(noreplace) %{_sysconfdir}/glances
 %{python_sitelib}/*
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
