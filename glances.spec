@@ -4,7 +4,7 @@
 
 Name:		glances		
 Version:	2.5.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -57,6 +57,9 @@ rm -rf %{buildroot}
 %{_datadir}/man/man1/glances.1.gz
 
 %changelog
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Sat Nov  7 2015 Edouard Bourguignon <madko@linuxed.net> - 2.5.1
 - Update to 2.5.1
 
