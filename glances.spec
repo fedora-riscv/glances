@@ -1,27 +1,23 @@
-%if 0%{?rhel} && 0%{?rhel} <= 5
-%{!?python_sitelib: %global python_sitelib %(%{__python}26 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%endif
+%global srcname glances 
+%global sum	CLI curses based monitoring tool
 
-Name:		glances		
-Version:	2.5.1
-Release:	2%{?dist}
-Summary:	CLI curses based monitoring tool
+Name:		python-%{srcname}		
+Version:	2.6.1
+Release:	1%{?dist}
+Summary:	%{sum}
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
-%if 0%{?rhel} && 0%{?rhel} <= 5
-BuildRequires:	python26-distribute
-Requires:	python26-distribute
-Requires:	python26-psutil >= 0.4.1
-BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-%else
-BuildRequires:	python-setuptools
-Requires:	python-setuptools
-Requires:	python-psutil >= 2.0.0
-%endif
+BuildRequires:  python2-devel python3-devel
+BuildRequires:	python-setuptools python3-setuptools
+BuildRequires:	python2-psutil >= 2.0.0
+BuildRequires:	python3-psutil >= 2.0.0
+Requires:	python-setuptools python3-setuptools
+Requires:	python2-psutil >= 2.0.0
+Requires:	python3-psutil >= 2.0.0
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -30,41 +26,77 @@ Glances uses the PsUtil library to get information from your system.
 
 It is developed in Python.
 
+
+%package -n python2-%{srcname}
+Summary:        %{sum}
+%{?python_provide:%python_provide python2-%{srcname}}
+
+%description -n python2-%{srcname}
+Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
+
+Glances uses the PsUtil library to get information from your system.
+
+It is developed in Python.
+
+
+%package -n python3-%{srcname}
+Summary:        %{sum}
+%{?python_provide:%python_provide python3-%{srcname}}
+
+%description -n python3-%{srcname}
+Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
+
+Glances uses the PsUtil library to get information from your system.
+
+It is developed in Python.
+
+
 %prep
-%setup -q
+%autosetup -n %{srcname}-%{version}
 
 %build
-
+%py2_build
+%py3_build
 
 %install
-%if 0%{?rhel} && 0%{?rhel} <= 5
-%{__python}26 setup.py install --root %{buildroot}
-%else
-%{__python} setup.py install --root %{buildroot}
-%endif
+# Must do the python2 install first because the scripts in /usr/bin are
+# overwritten with every setup.py install, and in general we want the
+# python3 version to be the default.
+%py2_install
+%py3_install
 
+%check
+%{__python2} setup.py test
+%{__python3} setup.py test
 
 %clean
 rm -rf %{buildroot} 
 
 
-%files
+%files -n python2-%{srcname}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %{_bindir}/glances
-%{python_sitelib}/*
+%{python2_sitelib}/*
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
+%files -n python3-%{srcname}
+%defattr(-,root,root,-)
+%doc AUTHORS COPYING README.rst NEWS
+%{_bindir}/glances
+%{python3_sitelib}/*
+%exclude %{_datadir}/doc/glances
+%{_datadir}/man/man1/glances.1.gz
+
+
 %changelog
-* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.1-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+* Thu Apr 28 2016 Edouard Bourguignon <madko@linuxed.net> - 2.6.1
+- Update to 2.6.1
+- Provides python2 and python3 packages
 
-* Sat Nov  7 2015 Edouard Bourguignon <madko@linuxed.net> - 2.5.1
+* Sat Oct 10 2015 Edouard Bourguignon <madko@linuxed.net> - 2.5.1
 - Update to 2.5.1
-
-* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
 * Sun Feb 01 2015 Edouard Bourguignon <madko@linuxed.net> - 2.3-1
 - Update to 2.3
