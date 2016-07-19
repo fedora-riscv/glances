@@ -3,7 +3,7 @@
 
 Name:		python-%{srcname}		
 Version:	2.6.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -91,6 +91,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6.1-2
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Thu Apr 28 2016 Edouard Bourguignon <madko@linuxed.net> - 2.6.1
 - Update to 2.6.1
 - Provides python2 and python3 packages
