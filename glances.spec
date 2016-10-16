@@ -15,9 +15,6 @@ BuildRequires:  python2-devel python3-devel
 BuildRequires:	python-setuptools python3-setuptools
 BuildRequires:	python2-psutil >= 2.0.0
 BuildRequires:	python3-psutil >= 2.0.0
-Requires:	python-setuptools python3-setuptools
-Requires:	python2-psutil >= 2.0.0
-Requires:	python3-psutil >= 2.0.0
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -28,6 +25,8 @@ It is developed in Python.
 
 
 %package -n python2-%{srcname}
+Requires:	python-setuptools
+Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
 %{?python_provide:%python_provide python2-%{srcname}}
 
@@ -40,6 +39,8 @@ It is developed in Python.
 
 
 %package -n python3-%{srcname}
+Requires:	python3-setuptools
+Requires:	python3-psutil >= 2.0.0
 Summary:        %{sum}
 %{?python_provide:%python_provide python3-%{srcname}}
 
@@ -78,7 +79,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %license COPYING
-%{_bindir}/glances
 %{python2_sitelib}/%{name}/
 %{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
 %exclude %{_datadir}/doc/glances
