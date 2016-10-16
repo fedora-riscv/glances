@@ -63,6 +63,7 @@ It is developed in Python.
 # overwritten with every setup.py install, and in general we want the
 # python3 version to be the default.
 %py2_install
+rm %{buildroot}%{_bindir}/*
 %py3_install
 
 %check
@@ -76,21 +77,28 @@ rm -rf %{buildroot}
 %files -n python2-%{srcname}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
+%license COPYING
 %{_bindir}/glances
-%{python2_sitelib}/*
+%{python2_sitelib}/%{name}/
+%{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
 %files -n python3-%{srcname}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
+%license COPYING
 %{_bindir}/glances
-%{python3_sitelib}/*
+%{python3_sitelib}/%{name}/
+%{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
 
 %changelog
+* Sun Oct 16 2016 Edouard Bourguignon <madko@linuxed.net> - 2.6.1-3
+- Fix for python2 and python3 packages
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6.1-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
