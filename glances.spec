@@ -25,6 +25,7 @@ It is developed in Python.
 
 
 %package -n python2-%{srcname}
+Provides: 	%{srcname} = %{version}-%{release}
 Requires:	python-setuptools
 Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
@@ -38,13 +39,13 @@ Glances uses the PsUtil library to get information from your system.
 It is developed in Python.
 
 
-%package -n python3-%{srcname}
+%package -n %{srcname}
 Requires:	python3-setuptools
 Requires:	python3-psutil >= 2.0.0
 Summary:        %{sum}
 %{?python_provide:%python_provide python3-%{srcname}}
 
-%description -n python3-%{srcname}
+%description -n %{srcname}
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
 Glances uses the PsUtil library to get information from your system.
@@ -84,7 +85,7 @@ rm -rf %{buildroot}
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
-%files -n python3-%{srcname}
+%files -n %{srcname}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
