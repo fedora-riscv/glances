@@ -1,6 +1,7 @@
+%global srcname glances 
 %global sum	CLI curses based monitoring tool
 
-Name:		glances		
+Name:		python-%{srcname}		
 Version:	2.7.1
 Release:	1%{?dist}
 Summary:	%{sum}
@@ -23,14 +24,14 @@ Glances uses the PsUtil library to get information from your system.
 It is developed in Python.
 
 
-%package -n python2-%{name}
-%{?python_provide:%python_provide python2-%{name}}
+%package -n python2-%{srcname}
+%{?python_provide:%python_provide python2-%{srcname}}
 Requires:	python-setuptools
 Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
-%{?python_provide:%python_provide python2-%{name}}
+%{?python_provide:%python_provide python2-%{srcname}}
 
-%description -n python2-%{name}
+%description -n python2-%{srcname}
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
 Glances uses the PsUtil library to get information from your system.
@@ -38,13 +39,13 @@ Glances uses the PsUtil library to get information from your system.
 It is developed in Python.
 
 
-%package
-%{?python_provide:%python_provide python3-%{name}}
+%package -n %{srcname}
+%{?python_provide:%python_provide python3-%{srcname}}
 Requires:	python3-setuptools
 Requires:	python3-psutil >= 2.0.0
 Summary:        %{sum}
 
-%description
+%description -n %{srcname}
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
 Glances uses the PsUtil library to get information from your system.
@@ -53,7 +54,7 @@ It is developed in Python.
 
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{srcname}-%{version}
 
 %build
 %py2_build
@@ -74,21 +75,21 @@ It is developed in Python.
 rm -rf %{buildroot} 
 
 
-%files -n python2-%{name}
+%files -n python2-%{srcname}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %license COPYING
-%{python2_sitelib}/%{name}/
+%{python2_sitelib}/%{srcname}/
 %{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
-%files
+%files -n %{srcname}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
 %{_bindir}/glances
-%{python3_sitelib}/%{name}/
+%{python3_sitelib}/%{srcname}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
