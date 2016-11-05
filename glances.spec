@@ -30,7 +30,7 @@ Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
 %{?python_provide:%python_provide python2-%{name}}
 
-%description -n python2-%{srcname}
+%description -n python2-%{name}
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
 Glances uses the PsUtil library to get information from your system.
