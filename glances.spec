@@ -1,7 +1,7 @@
 %global srcname glances 
 %global sum	CLI curses based monitoring tool
 
-Name:		python-%{srcname}		
+Name:		%{srcname}		
 Version:	2.7.1
 Release:	1%{?dist}
 Summary:	%{sum}
