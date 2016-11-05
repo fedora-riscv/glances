@@ -1,7 +1,6 @@
-%global srcname glances 
 %global sum	CLI curses based monitoring tool
 
-Name:		python-%{srcname}		
+Name:		glances	
 Version:	2.7.1
 Release:	1%{?dist}
 Summary:	%{sum}
@@ -16,6 +15,10 @@ BuildRequires:	python-setuptools python3-setuptools
 BuildRequires:	python2-psutil >= 2.0.0
 BuildRequires:	python3-psutil >= 2.0.0
 
+%{?python_provide:%python_provide python3-%{name}}
+Requires:	python3-setuptools
+Requires:	python3-psutil >= 2.0.0
+
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
@@ -24,28 +27,15 @@ Glances uses the PsUtil library to get information from your system.
 It is developed in Python.
 
 
-%package -n python2-%{srcname}
-%{?python_provide:%python_provide python2-%{srcname}}
+%package -n python2-%{name}
+%{?python_provide:%python_provide python2-%{name}}
 Requires:	python-setuptools
 Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
-%{?python_provide:%python_provide python2-%{srcname}}
+Provides:	%{name} = %{version}-%{release}
+%{?python_provide:%python_provide python2-%{name}}
 
-%description -n python2-%{srcname}
-Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
-
-Glances uses the PsUtil library to get information from your system.
-
-It is developed in Python.
-
-
-%package -n %{srcname}
-%{?python_provide:%python_provide python3-%{srcname}}
-Requires:	python3-setuptools
-Requires:	python3-psutil >= 2.0.0
-Summary:        %{sum}
-
-%description -n %{srcname}
+%description -n python2-%{name}
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
 
 Glances uses the PsUtil library to get information from your system.
@@ -54,7 +44,7 @@ It is developed in Python.
 
 
 %prep
-%autosetup -n %{srcname}-%{version}
+%autosetup -n %{name}-%{version}
 
 %build
 %py2_build
@@ -75,21 +65,21 @@ It is developed in Python.
 rm -rf %{buildroot} 
 
 
-%files -n python2-%{srcname}
+%files -n python2-%{name}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %license COPYING
-%{python2_sitelib}/%{srcname}/
+%{python2_sitelib}/%{name}/
 %{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
-%files -n %{srcname}
+%files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
 %{_bindir}/glances
-%{python3_sitelib}/%{srcname}/
+%{python3_sitelib}/%{name}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
