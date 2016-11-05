@@ -2,8 +2,8 @@
 %global sum	CLI curses based monitoring tool
 
 Name:		python-%{srcname}		
-Version:	2.6.1
-Release:	2%{?dist}
+Version:	2.7.1
+Release:	1%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -25,7 +25,7 @@ It is developed in Python.
 
 
 %package -n python2-%{srcname}
-Provides: 	%{srcname} = %{version}-%{release}
+%{?python_provide:%python_provide python2-%{srcname}}
 Requires:	python-setuptools
 Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
@@ -40,10 +40,10 @@ It is developed in Python.
 
 
 %package -n %{srcname}
+%{?python_provide:%python_provide python3-%{srcname}}
 Requires:	python3-setuptools
 Requires:	python3-psutil >= 2.0.0
 Summary:        %{sum}
-%{?python_provide:%python_provide python3-%{srcname}}
 
 %description -n %{srcname}
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -65,7 +65,6 @@ It is developed in Python.
 # overwritten with every setup.py install, and in general we want the
 # python3 version to be the default.
 %py2_install
-rm %{buildroot}%{_bindir}/*
 %py3_install
 
 %check
@@ -80,7 +79,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %license COPYING
-%{python2_sitelib}/%{name}/
+%{python2_sitelib}/%{srcname}/
 %{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
@@ -90,13 +89,16 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
 %{_bindir}/glances
-%{python3_sitelib}/%{name}/
+%{python3_sitelib}/%{srcname}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1.gz
 
 
 %changelog
+* Mon Oct 17 2016 Edouard Bourguignon <madko@linuxed.net> - 2.7.1-1
+- Upgrade to 2.7.1
+
 * Sun Oct 16 2016 Edouard Bourguignon <madko@linuxed.net> - 2.6.1-3
 - Fix for python2 and python3 packages
 
