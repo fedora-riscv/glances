@@ -2,7 +2,7 @@
 
 Name:		glances	
 Version:	2.7.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -86,6 +86,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.7.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Mon Oct 17 2016 Edouard Bourguignon <madko@linuxed.net> - 2.7.1-1
 - Upgrade to 2.7.1
 
