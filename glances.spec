@@ -1,8 +1,8 @@
 %global sum	CLI curses based monitoring tool
 
 Name:		glances	
-Version:	2.11.1
-Release:	1%{?dist}
+Version:	2.7.1
+Release:	3%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -86,9 +86,6 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sun Nov 26 2017 Edouard Bourguignon <madko@linuxed.net> - 2.11.1-1
-- Upgrade to 2.11.1
-
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.7.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
