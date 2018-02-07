@@ -2,7 +2,7 @@
 
 Name:		glances	
 Version:	2.11.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -86,6 +86,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Sun Nov 26 2017 Edouard Bourguignon <madko@linuxed.net> - 2.11.1-1
 - Upgrade to 2.11.1
 
