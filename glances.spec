@@ -61,9 +61,6 @@ It is developed in Python.
 %{__python2} setup.py test
 %{__python3} setup.py test
 
-%clean
-rm -rf %{buildroot} 
-
 
 %files -n python2-%{name}
 %defattr(-,root,root,-)
