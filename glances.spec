@@ -2,7 +2,7 @@
 
 Name:		glances	
 Version:	2.11.1
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -83,6 +83,9 @@ It is developed in Python.
 
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-4
+- Rebuilt for Python 3.7
+
 * Wed Feb 14 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.11.1-3
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
