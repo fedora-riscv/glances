@@ -63,7 +63,6 @@ It is developed in Python.
 
 
 %files -n python2-%{name}
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %license COPYING
 %{python2_sitelib}/%{name}/
@@ -72,7 +71,6 @@ It is developed in Python.
 %{_datadir}/man/man1/glances.1.gz
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
 %{_bindir}/glances
