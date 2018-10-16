@@ -1,8 +1,9 @@
 %global sum	CLI curses based monitoring tool
+%global _python_bytecompile_errors_terminate_build 0
 
 Name:		glances	
-Version:	2.11.1
-Release:	5%{?dist}
+Version:	3.0.2
+Release:	1%{?dist}
 Summary:	%{sum}
 
 Group:		Applications/System		
@@ -11,7 +12,7 @@ URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:  python2-devel python3-devel
-BuildRequires:	python2-setuptools python3-setuptools
+BuildRequires:	python-setuptools python3-setuptools
 BuildRequires:	python2-psutil >= 2.0.0
 BuildRequires:	python3-psutil >= 2.0.0
 
@@ -29,7 +30,7 @@ It is developed in Python.
 
 %package -n python2-%{name}
 %{?python_provide:%python_provide python2-%{name}}
-Requires:	python2-setuptools
+Requires:	python-setuptools
 Requires:	python2-psutil >= 2.0.0
 Summary:        %{sum}
 Provides:	%{name} = %{version}-%{release}
@@ -61,8 +62,12 @@ It is developed in Python.
 %{__python2} setup.py test
 %{__python3} setup.py test
 
+%clean
+rm -rf %{buildroot} 
+
 
 %files -n python2-%{name}
+%defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS 
 %license COPYING
 %{python2_sitelib}/%{name}/
@@ -71,6 +76,7 @@ It is developed in Python.
 %{_datadir}/man/man1/glances.1.gz
 
 %files
+%defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
 %{_bindir}/glances
@@ -81,18 +87,9 @@ It is developed in Python.
 
 
 %changelog
-* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-5
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
-
-* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-4
-- Rebuilt for Python 3.7
-
-* Wed Feb 14 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.11.1-3
-- Update Python 2 dependency declarations to new packaging standards
-  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
-
-* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+* Mon Oct  8 2018 Edouard Bourguignon <madko@linuxed.net> - 3.0.2-1
+- Upgrade to 3.0.2
+- Don't byte compile
 
 * Sun Nov 26 2017 Edouard Bourguignon <madko@linuxed.net> - 2.11.1-1
 - Upgrade to 2.11.1
