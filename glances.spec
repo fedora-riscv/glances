@@ -1,23 +1,18 @@
-%global sum	CLI curses based monitoring tool
-
-Name:		glances	
+Name:		glances
 Version:	2.11.1
-Release:	5%{?dist}
-Summary:	%{sum}
-
-Group:		Applications/System		
+Release:	6%{?dist}
+Summary:	CLI curses based monitoring tool
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
-BuildRequires:  python2-devel python3-devel
-BuildRequires:	python2-setuptools python3-setuptools
-BuildRequires:	python2-psutil >= 2.0.0
+BuildRequires:	python3-devel
+BuildRequires:	python3-setuptools
 BuildRequires:	python3-psutil >= 2.0.0
 
 %{?python_provide:%python_provide python3-%{name}}
+Provides:	python3-%{name} = %{version}-%{release}
 Requires:	python3-setuptools
-Requires:	python3-psutil >= 2.0.0
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -26,49 +21,17 @@ Glances uses the PsUtil library to get information from your system.
 
 It is developed in Python.
 
-
-%package -n python2-%{name}
-%{?python_provide:%python_provide python2-%{name}}
-Requires:	python2-setuptools
-Requires:	python2-psutil >= 2.0.0
-Summary:        %{sum}
-Provides:	%{name} = %{version}-%{release}
-%{?python_provide:%python_provide python2-%{name}}
-
-%description -n python2-%{name}
-Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
-
-Glances uses the PsUtil library to get information from your system.
-
-It is developed in Python.
-
-
 %prep
 %autosetup -n %{name}-%{version}
 
 %build
-%py2_build
 %py3_build
 
 %install
-# Must do the python2 install first because the scripts in /usr/bin are
-# overwritten with every setup.py install, and in general we want the
-# python3 version to be the default.
-%py2_install
 %py3_install
 
 %check
-%{__python2} setup.py test
 %{__python3} setup.py test
-
-
-%files -n python2-%{name}
-%doc AUTHORS COPYING README.rst NEWS 
-%license COPYING
-%{python2_sitelib}/%{name}/
-%{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
-%exclude %{_datadir}/doc/glances
-%{_datadir}/man/man1/glances.1.gz
 
 %files
 %doc AUTHORS COPYING README.rst NEWS
@@ -81,6 +44,9 @@ It is developed in Python.
 
 
 %changelog
+* Thu Jan 10 2019 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-6
+- Remove python2 subpackage
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
