@@ -1,6 +1,7 @@
+%{?python_enable_dependency_generator}
 Name:		glances
 Version:	2.11.1
-Release:	6%{?dist}
+Release:	7%{?dist}
 Summary:	CLI curses based monitoring tool
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
@@ -12,7 +13,6 @@ BuildRequires:	python3-psutil >= 2.0.0
 
 %{?python_provide:%python_provide python3-%{name}}
 Provides:	python3-%{name} = %{version}-%{release}
-Requires:	python3-setuptools
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -40,10 +40,13 @@ It is developed in Python.
 %{python3_sitelib}/%{name}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
-%{_datadir}/man/man1/glances.1.gz
+%{_datadir}/man/man1/glances.1*
 
 
 %changelog
+* Fri Jan 11 2019 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 2.11.1-7
+- Enable python dependency generator
+
 * Thu Jan 10 2019 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-6
 - Remove python2 subpackage
 
