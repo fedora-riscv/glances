@@ -1,7 +1,7 @@
 %{?python_enable_dependency_generator}
 Name:		glances
 Version:	2.11.1
-Release:	7%{?dist}
+Release:	8%{?dist}
 Summary:	CLI curses based monitoring tool
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
@@ -44,6 +44,9 @@ It is developed in Python.
 
 
 %changelog
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Fri Jan 11 2019 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 2.11.1-7
 - Enable python dependency generator
 
