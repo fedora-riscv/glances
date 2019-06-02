@@ -1,24 +1,22 @@
-%global sum	CLI curses based monitoring tool
 %global _python_bytecompile_errors_terminate_build 0
 
+%{?python_enable_dependency_generator}
 Name:		glances	
 Version:	3.0.2
 Release:	1%{?dist}
-Summary:	%{sum}
+Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
-BuildRequires:  python2-devel python3-devel
-BuildRequires:	python-setuptools python3-setuptools
-BuildRequires:	python2-psutil >= 2.0.0
+BuildRequires:	python3-devel
+BuildRequires:	python3-setuptools
 BuildRequires:	python3-psutil >= 2.0.0
 
 %{?python_provide:%python_provide python3-%{name}}
-Requires:	python3-setuptools
-Requires:	python3-psutil >= 2.0.0
+Provides:	python3-%{name} = %{version}-%{release}
 
 %description
 Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
@@ -27,68 +25,53 @@ Glances uses the PsUtil library to get information from your system.
 
 It is developed in Python.
 
-
-%package -n python2-%{name}
-%{?python_provide:%python_provide python2-%{name}}
-Requires:	python-setuptools
-Requires:	python2-psutil >= 2.0.0
-Summary:        %{sum}
-Provides:	%{name} = %{version}-%{release}
-%{?python_provide:%python_provide python2-%{name}}
-
-%description -n python2-%{name}
-Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
-
-Glances uses the PsUtil library to get information from your system.
-
-It is developed in Python.
-
-
 %prep
 %autosetup -n %{name}-%{version}
 
 %build
-%py2_build
 %py3_build
 
 %install
-# Must do the python2 install first because the scripts in /usr/bin are
-# overwritten with every setup.py install, and in general we want the
-# python3 version to be the default.
-%py2_install
 %py3_install
 
 %check
-%{__python2} setup.py test
 %{__python3} setup.py test
 
-%clean
-rm -rf %{buildroot} 
-
-
-%files -n python2-%{name}
-%defattr(-,root,root,-)
-%doc AUTHORS COPYING README.rst NEWS 
-%license COPYING
-%{python2_sitelib}/%{name}/
-%{python2_sitelib}/Glances-%{version}-py%{python2_version}.egg-info/
-%exclude %{_datadir}/doc/glances
-%{_datadir}/man/man1/glances.1.gz
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING README.rst NEWS
 %license COPYING
 %{_bindir}/glances
 %{python3_sitelib}/%{name}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
-%{_datadir}/man/man1/glances.1.gz
+%{_datadir}/man/man1/glances.1*
 
 
 %changelog
-* Mon Oct  8 2018 Edouard Bourguignon <madko@linuxed.net> - 3.0.2-1
+* Sun Jun  2 2019 Edouard Bourguignon <madko@linuxed.net> - 3.0.2-1
 - Upgrade to 3.0.2
+
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Fri Jan 11 2019 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 2.11.1-7
+- Enable python dependency generator
+
+* Thu Jan 10 2019 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-6
+- Remove python2 subpackage
+
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-4
+- Rebuilt for Python 3.7
+
+* Wed Feb 14 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.11.1-3
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
 * Sun Nov 26 2017 Edouard Bourguignon <madko@linuxed.net> - 2.11.1-1
 - Upgrade to 2.11.1
