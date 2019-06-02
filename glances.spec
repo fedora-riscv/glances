@@ -1,7 +1,8 @@
 %global sum	CLI curses based monitoring tool
+%global _python_bytecompile_errors_terminate_build 0
 
 Name:		glances	
-Version:	2.11.1
+Version:	3.0.2
 Release:	1%{?dist}
 Summary:	%{sum}
 
@@ -86,6 +87,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct  8 2018 Edouard Bourguignon <madko@linuxed.net> - 3.0.2-1
+- Upgrade to 3.0.2
+
 * Sun Nov 26 2017 Edouard Bourguignon <madko@linuxed.net> - 2.11.1-1
 - Upgrade to 2.11.1
 
