@@ -2,7 +2,7 @@
 
 %{?python_enable_dependency_generator}
 Name:		glances	
-Version:	3.0.2
+Version:	3.1.0
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -48,6 +48,9 @@ It is developed in Python.
 
 
 %changelog
+* Sun Jun  2 2019 Edouard Bourguignon <madko@linuxed.net> - 3.1.0-1
+- Upgrade to 3.1.0
+
 * Sun Jun  2 2019 Edouard Bourguignon <madko@linuxed.net> - 3.0.2-1
 - Upgrade to 3.0.2
 
