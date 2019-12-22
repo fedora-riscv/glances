@@ -3,12 +3,15 @@
 %{?python_enable_dependency_generator}
 Name:		glances	
 Version:	3.1.4.1
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	CLI curses based monitoring tool
 
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
+# disable warning that suggests updating via pip
+# https://bugzilla.redhat.com/show_bug.cgi?id=1773662
+Patch0:		disable-outdated-warning.patch
 BuildArch:	noarch
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
@@ -25,7 +28,9 @@ Glances uses the PsUtil library to get information from your system.
 It is developed in Python.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}-%{version} -p 1
+# related to patch0
+rm glances/outdated.py
 
 %build
 %py3_build
@@ -47,6 +52,9 @@ It is developed in Python.
 
 
 %changelog
+* Wed May 27 2020 Carl George <carl@george.computer> - 3.1.4.1-3
+- Add patch0 to disable outdated warning rhbz#1773662
+
 * Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 3.1.4.1-2
 - Rebuilt for Python 3.9
 
