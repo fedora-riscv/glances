@@ -2,18 +2,17 @@
 
 %{?python_enable_dependency_generator}
 Name:		glances	
-Version:	3.1.4
+Version:	3.1.4.1
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
-Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
-BuildRequires:	python3-psutil >= 2.0.0
+BuildRequires:	python3-psutil >= 5.3.0
 
 %{?python_provide:%python_provide python3-%{name}}
 Provides:	python3-%{name} = %{version}-%{release}
@@ -48,6 +47,11 @@ It is developed in Python.
 
 
 %changelog
+* Thu May 21 2020 Richard Shaw <hobbes1069@gmail.com> - 3.1.4.1-1
+- Update to 3.1.4.1.
+- Update BR on psutil based on actual requirement generated.
+- Remove long obsolete Group tag in spec file.
+
 * Sat Mar 14 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4-1
 - Upgrade to 3.1.4
 
