@@ -3,7 +3,7 @@
 %{?python_enable_dependency_generator}
 Name:		glances	
 Version:	3.1.4.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	CLI curses based monitoring tool
 
 License:	GPLv3
@@ -47,6 +47,9 @@ It is developed in Python.
 
 
 %changelog
+* Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 3.1.4.1-2
+- Rebuilt for Python 3.9
+
 * Thu May 21 2020 Richard Shaw <hobbes1069@gmail.com> - 3.1.4.1-1
 - Update to 3.1.4.1.
 - Update BR on psutil based on actual requirement generated.
