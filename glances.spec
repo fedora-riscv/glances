@@ -2,14 +2,15 @@
 
 %{?python_enable_dependency_generator}
 Name:		glances	
-Version:	3.1.0
-Release:	1%{?dist}
+Version:	3.1.4.1
+Release:	4%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
+Source1:	glances.conf
 BuildArch:	noarch
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
@@ -33,13 +34,15 @@ It is developed in Python.
 
 %install
 %py3_install
+%{__install} -p -D -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/glances/glances.conf
 
 %check
 %{__python3} setup.py test
 
 %files
-%doc AUTHORS COPYING README.rst NEWS
+%doc AUTHORS COPYING README.rst
 %license COPYING
+%{_sysconfdir}/glances/glances.conf
 %{_bindir}/glances
 %{python3_sitelib}/%{name}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
@@ -48,6 +51,19 @@ It is developed in Python.
 
 
 %changelog
+* Wed May 27 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4.1-4
+- Upgrade to 3.1.4.1
+- Adding glances.conf to prevent update checks rhbz#1773662
+
+* Wed May 27 2020 Carl George <carl@george.computer> - 3.1.4.1-3
+- Add patch0 to disable outdated warning rhbz#1773662
+
+* Sat Mar 14 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4-1
+- Upgrade to 3.1.4
+
+* Fri Aug 16 2019 Edouard Bourguignon <madko@linuxed.net> - 3.1.1-1
+- Upgrade to 3.1.1
+
 * Sun Jun  2 2019 Edouard Bourguignon <madko@linuxed.net> - 3.1.0-1
 - Upgrade to 3.1.0
 
