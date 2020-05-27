@@ -2,7 +2,7 @@
 
 %{?python_enable_dependency_generator}
 Name:		glances	
-Version:	3.1.4
+Version:	3.1.4.1
 Release:	1%{?dist}
 Summary:	CLI curses based monitoring tool
 
@@ -10,6 +10,7 @@ Group:		Applications/System
 License:	GPLv3
 URL:		https://github.com/nicolargo/glances
 Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
+Source1:	glances.conf
 BuildArch:	noarch
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
@@ -33,6 +34,7 @@ It is developed in Python.
 
 %install
 %py3_install
+%{__install} -p -D -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/glances/glances.conf
 
 %check
 %{__python3} setup.py test
@@ -40,6 +42,7 @@ It is developed in Python.
 %files
 %doc AUTHORS COPYING README.rst
 %license COPYING
+%{_sysconfdir}/glances/glances.conf
 %{_bindir}/glances
 %{python3_sitelib}/%{name}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
@@ -48,20 +51,15 @@ It is developed in Python.
 
 
 %changelog
+* Wed May 27 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4.1-1
+- Upgrade to 3.1.4.1
+- Adding glances.conf to prevent update checks
+
 * Sat Mar 14 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4-1
 - Upgrade to 3.1.4
 
-* Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.0-5
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
-
-* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1.0-4
-- Rebuilt for Python 3.8.0rc1 (#1748018)
-
-* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1.0-3
-- Rebuilt for Python 3.8
-
-* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+* Fri Aug 16 2019 Edouard Bourguignon <madko@linuxed.net> - 3.1.1-1
+- Upgrade to 3.1.1
 
 * Sun Jun  2 2019 Edouard Bourguignon <madko@linuxed.net> - 3.1.0-1
 - Upgrade to 3.1.0
