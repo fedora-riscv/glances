@@ -1,0 +1,31 @@
+diff -Nurp glances-3.1.0.orig/glances/standalone.py glances-3.1.0/glances/standalone.py
+--- glances-3.1.0.orig/glances/standalone.py	2019-12-22 14:16:39.845870773 -0600
++++ glances-3.1.0/glances/standalone.py	2019-12-22 14:17:29.059115003 -0600
+@@ -29,7 +29,6 @@ from glances.stats import GlancesStats
+ from glances.outputs.glances_curses import GlancesCursesStandalone
+ from glances.outputs.glances_stdout import GlancesStdout
+ from glances.outputs.glances_stdout_csv import GlancesStdoutCsv
+-from glances.outdated import Outdated
+ from glances.timer import Counter
+ 
+ 
+@@ -92,9 +91,6 @@ class GlancesStandalone(object):
+             # Init screen
+             self.screen = GlancesCursesStandalone(config=config, args=args)
+ 
+-        # Check the latest Glances version
+-        self.outdated = Outdated(config=config, args=args)
+-
+     @property
+     def quiet(self):
+         return self._quiet
+@@ -156,9 +152,3 @@ class GlancesStandalone(object):
+ 
+         # Exit from export modules
+         self.stats.end()
+-
+-        # Check Glances version versus PyPI one
+-        if self.outdated.is_outdated():
+-            print("You are using Glances version {}, however version {} is available.".format(
+-                self.outdated.installed_version(), self.outdated.latest_version()))
+-            print("You should consider upgrading using: pip install --upgrade glances")
