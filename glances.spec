@@ -3,7 +3,7 @@
 %{?python_enable_dependency_generator}
 Name:		glances	
 Version:	3.1.4.1
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	CLI curses based monitoring tool
 
 Group:		Applications/System		
@@ -42,7 +42,7 @@ It is developed in Python.
 %files
 %doc AUTHORS COPYING README.rst
 %license COPYING
-%{_sysconfdir}/glances/glances.conf
+%config(noreplace) %{_sysconfdir}/glances/glances.conf
 %{_bindir}/glances
 %{python3_sitelib}/%{name}/
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
@@ -51,6 +51,9 @@ It is developed in Python.
 
 
 %changelog
+* Wed May 27 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4.1-5
+- /etc/glances/glances.conf is config(noreplace)
+
 * Wed May 27 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4.1-4
 - Upgrade to 3.1.4.1
 - Adding glances.conf to prevent update checks rhbz#1773662
