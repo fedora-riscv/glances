@@ -3,7 +3,7 @@
 %{?python_enable_dependency_generator}
 Name:		glances	
 Version:	3.1.4.1
-Release:	12%{?dist}
+Release:	13%{?dist}
 Summary:	CLI curses based monitoring tool
 
 License:	GPLv3
@@ -50,6 +50,9 @@ It is developed in Python.
 
 
 %changelog
+* Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 3.1.4.1-13
+- Rebuilt for Python 3.11
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.4.1-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
