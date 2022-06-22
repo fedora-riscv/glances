@@ -1,0 +1,22 @@
+--- a/unitest-restful.py	2022-05-06 14:47:44.554391265 +0300
++++ b/unitest-restful.py	2022-05-06 14:48:19.719234237 +0300
+@@ -64,7 +64,7 @@
+         global pid
+ 
+         print('INFO: [TEST_000] Start the Glances Web Server')
+-        cmdline = "python -m glances -w -p %s" % SERVER_PORT
++        cmdline = "python3 -m glances -B localhost -w -p %s" % SERVER_PORT
+         print("Run the Glances Web Server on port %s" % SERVER_PORT)
+         args = shlex.split(cmdline)
+         pid = subprocess.Popen(args)
+--- a/unitest-xmlrpc.py	2022-05-06 14:47:54.544346654 +0300
++++ b/unitest-xmlrpc.py	2022-05-06 14:48:31.281182609 +0300
+@@ -53,7 +53,7 @@
+         global pid
+ 
+         print('INFO: [TEST_000] Start the Glances Web Server')
+-        cmdline = "python -m glances -s -p %s" % SERVER_PORT
++        cmdline = "python3 -m glances -B localhost -s -p %s" % SERVER_PORT
+         print("Run the Glances Server on port %s" % SERVER_PORT)
+         args = shlex.split(cmdline)
+         pid = subprocess.Popen(args)
