@@ -1,42 +1,80 @@
 %global _python_bytecompile_errors_terminate_build 0
+%bcond_without tests
+
+%global desc %{expand: \
+Glances is a cross-platform monitoring tool which aims to present a large
+amount of monitoring information through a curses or Web based interface.
+The information dynamically adapts depending on the size of the user interface
+
+It can also work in client/server mode. Remote monitoring could be done via
+terminal, Web interface or API (XML-RPC and RESTful). Stats can also be
+exported to files or external time/value databases.
+
+Glances is written in Python and uses libraries to grab information from your
+system. It is based on an open architecture where developers can add new
+plugins or exports modules.}
 
 %{?python_enable_dependency_generator}
 Name:		glances	
-Version:	3.1.4.1
-Release:	7%{?dist}
-Summary:	CLI curses based monitoring tool
+Version:	3.2.5
+Release:	1%{?dist}
+Summary:	A cross-platform curses-based monitoring tool
 
 License:	GPLv3
-URL:		https://github.com/nicolargo/glances
-Source0:	https://github.com/nicolargo/glances/archive/v%{version}.tar.gz
-Source1:	glances.conf
-BuildArch:	noarch
-BuildRequires:	python3-devel
-BuildRequires:	python3-setuptools
-BuildRequires:	python3-psutil >= 5.3.0
+URL:		https://nicolargo.github.io/glances/
+Source0:	https://github.com/nicolargo/glances/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1:	%{name}.service
 
-%{?python_provide:%python_provide python3-%{name}}
+Patch1:		disable-update-check.patch
+Patch2:		unitest-python3.patch
+
+BuildArch:	noarch
+
+BuildRequires:	python3-devel
+BuildRequires:	systemd-units
+%if %{with tests}
+BuildRequires:	python3-bottle
+BuildRequires:	python3-dateutil
+BuildRequires:	python3-psutil >= 5.3.0
+BuildRequires:	python3-defusedxml
+BuildRequires:	python3-requests
+%endif
+Requires:	python3-bottle
+Requires:	python3-dateutil
+
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{name}}
 Provides:	python3-%{name} = %{version}-%{release}
 
 %description
-Glances is a CLI curses based monitoring tool for both GNU/Linux and BSD.
-
-Glances uses the PsUtil library to get information from your system.
-
-It is developed in Python.
+%{desc}
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 %py3_build
 
 %install
 %py3_install
-%{__install} -p -D -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/glances/glances.conf
+mkdir -p %{buildroot}%{_unitdir}
+install -p -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
+install -D -p -m 644 conf/glances.conf $RPM_BUILD_ROOT/etc/glances/glances.conf
 
 %check
-%{__python3} setup.py test
+%if %{with tests}
+%{__python3} unitest.py
+%{__python3} unitest-restful.py
+%{__python3} unitest-xmlrpc.py
+%endif
+
+%post
+%systemd_post %{name}.service
+
+%preun
+%systemd_preun %{name}.service
+
+%postun
+%systemd_postun %{name}.service
 
 %files
 %doc AUTHORS COPYING README.rst
@@ -47,9 +85,28 @@ It is developed in Python.
 %{python3_sitelib}/Glances-%{version}-py%{python3_version}.egg-info/
 %exclude %{_datadir}/doc/glances
 %{_datadir}/man/man1/glances.1*
+%{_unitdir}/%{name}.service
 
 
 %changelog
+* Wed Jun 22 2022 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.2.5-1
+- Update to 3.2.5 (rhbz #1963987 and #1988545)
+
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.4.1-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.4.1-11
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 3.1.4.1-10
+- Rebuilt for Python 3.10
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.4.1-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.4.1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Mon Jun  1 2020 Edouard Bourguignon <madko@linuxed.net> - 3.1.4.1-7
 - Add missing changelog
 - Requires python-psutil 5.3 (or even more, for disk IO stats on recent kernels)
