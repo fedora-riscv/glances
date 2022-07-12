@@ -12,7 +12,7 @@ system. It is based on an open architecture where developers can add new
 plugins or exports modules.}
 
 Name:		glances	
-Version:	3.2.5
+Version:	3.2.6.4
 Release:	%autorelease
 Summary:	A cross-platform curses-based monitoring tool
 
@@ -22,7 +22,6 @@ Source0:	https://github.com/nicolargo/glances/archive/v%{version}/%{name}-%{vers
 Source1:	%{name}.service
 
 Patch1:		disable-update-check.patch
-Patch2:		unitest-python3.patch
 
 BuildArch:	noarch
 
@@ -39,6 +38,10 @@ Requires:	python3-bottle
 
 %prep
 %autosetup -p1 -n %{name}-%{version}
+
+# update disabled, no need for packaging dep
+sed -i "s/, 'packaging'//" setup.py
+sed -i '/packaging/d' requirements.txt
 
 %generate_buildrequires
 %pyproject_buildrequires -t
