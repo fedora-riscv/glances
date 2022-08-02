@@ -12,7 +12,7 @@ system. It is based on an open architecture where developers can add new
 plugins or exports modules.}
 
 Name:		glances	
-Version:	3.2.6.4
+Version:	3.2.7
 Release:	%autorelease
 Summary:	A cross-platform curses-based monitoring tool
 
@@ -30,8 +30,6 @@ BuildRequires:	python3-dateutil
 BuildRequires:	pyproject-rpm-macros
 BuildRequires:	systemd-units
 Requires:	python3-bottle
-
-%py_provides python3-glances
 
 %description
 %{desc}
@@ -71,7 +69,6 @@ install -D -p -m 644 conf/glances.conf $RPM_BUILD_ROOT/etc/glances/glances.conf
 
 %files -n glances -f %{pyproject_files}
 %doc AUTHORS COPYING README.rst
-%license COPYING
 %config(noreplace) %{_sysconfdir}/glances/glances.conf
 %exclude %{_datadir}/doc/glances
 %{_bindir}/glances
