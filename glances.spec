@@ -54,6 +54,10 @@ Provides:	python3-%{name} = %{version}-%{release}
 sed -i "s/, 'packaging'//" setup.py
 sed -i '/packaging/d' requirements.txt
 
+#python to python3 for tests
+sed -i -e "s|python -m|python3 -m|" unitest-restful.py
+sed -i -e "s|python -m|python3 -m|" unitest-xmlrpc.py 
+
 %build
 %py3_build
 
