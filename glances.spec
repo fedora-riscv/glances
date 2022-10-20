@@ -16,7 +16,7 @@ plugins or exports modules.}
 
 %{?python_enable_dependency_generator}
 Name:		glances	
-Version:	3.2.6.4
+Version:	3.3.0.1
 Release:	1%{?dist}
 Summary:	A cross-platform curses-based monitoring tool
 
@@ -53,10 +53,6 @@ Provides:	python3-%{name} = %{version}-%{release}
 # update disabled, no need for packaging dep
 sed -i "s/, 'packaging'//" setup.py
 sed -i '/packaging/d' requirements.txt
-
-#python to python3 for tests
-sed -i -e "s|python -m|python3 -m|" unitest-restful.py
-sed -i -e "s|python -m|python3 -m|" unitest-xmlrpc.py
 
 %build
 %py3_build
@@ -95,6 +91,9 @@ install -D -p -m 644 conf/glances.conf $RPM_BUILD_ROOT/etc/glances/glances.conf
 %{_unitdir}/%{name}.service
 
 %changelog
+* Thu Oct 20 2022 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.3.0.1-1
+- Update to 3.3.0.1 (RHBZ #2135228) and CVE-2022-25844 (RHBZ #2082542) 
+
 * Tue Jul 12 2022 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.2.6.4-1
 - Update to 3.2.6.4 (RHBZ #1870254)
 
