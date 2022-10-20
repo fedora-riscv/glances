@@ -12,7 +12,7 @@ system. It is based on an open architecture where developers can add new
 plugins or exports modules.}
 
 Name:		glances	
-Version:	3.2.7
+Version:	3.3.0.1
 Release:	1%{?dist}
 Summary:	A cross-platform curses-based monitoring tool
 
@@ -27,7 +27,6 @@ BuildArch:	noarch
 
 BuildRequires:	python3-devel
 BuildRequires:	python3-dateutil
-BuildRequires:	pyproject-rpm-macros
 BuildRequires:	systemd-units
 Requires:	python3-bottle
 
@@ -76,6 +75,9 @@ install -D -p -m 644 conf/glances.conf $RPM_BUILD_ROOT/etc/glances/glances.conf
 %{_unitdir}/%{name}.service
 
 %changelog
+* Thu Oct 20 2022 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.3.0.1-1
+- Update to 3.3.0.1 (RHBZ #2135228) and CVE-2022-25844 (RHBZ #2082542)
+
 * Tue Aug 02 2022 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.2.7-1
 - Update to 3.2.7 (RHBZ #2088525)
 
