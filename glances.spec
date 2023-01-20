@@ -17,7 +17,7 @@ plugins or exports modules.}
 %{?python_enable_dependency_generator}
 Name:		glances	
 Version:	3.3.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	A cross-platform system monitoring tool
 
 License:	LGPL-3.0-only AND MIT
@@ -41,6 +41,7 @@ BuildRequires:	python3-requests
 %endif
 Requires:	python3-bottle
 Requires:	python3-dateutil
+Requires:	python3-ujson
 
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{name}}
 Provides:	python3-%{name} = %{version}-%{release}
@@ -102,6 +103,9 @@ install -D -p -m 644 conf/glances.conf $RPM_BUILD_ROOT/etc/glances/glances.conf
 %{_unitdir}/%{name}.service
 
 %changelog
+* Fri Jan 20 2023 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.3.1-2
+- Rebuilt for RHBZ #2162627
+
 * Tue Jan 17 2023 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.3.1-1
 - Update to 3.3.1
 
