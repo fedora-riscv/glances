@@ -13,7 +13,7 @@ plugins or exports modules.}
 
 Name:		glances	
 Version:	3.3.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	A cross-platform system monitoring tool
 
 License:	LGPL-3.0-only AND MIT
