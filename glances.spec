@@ -30,6 +30,7 @@ BuildRequires:	python3-dateutil
 BuildRequires:	python3-ujson
 BuildRequires:	systemd-units
 Requires:	python3-bottle
+Requires:	python3-ujson
 
 %description
 %{desc}
@@ -82,6 +83,9 @@ install -D -p -m 644 conf/glances.conf $RPM_BUILD_ROOT/etc/glances/glances.conf
 %{_unitdir}/%{name}.service
 
 %changelog
+* Fri Jan 20 2023 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.3.1-2
+- Rebuilt for RHBZ #2162627
+
 * Tue Jan 17 2023 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3.3.1-1
 - Update to 3.3.1
 
